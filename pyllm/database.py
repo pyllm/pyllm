@@ -139,7 +139,6 @@ def parse_date_string(date_string: str = "2024-10-04 14:52:22"):
         enums.Common.date_formats_python
     ):
         try:
-
             datetime_value = datetime.datetime.strptime(
                 date_string,
                 date_format_python,
