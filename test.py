@@ -1,6 +1,7 @@
-from pyllm import Functor
+from pydantic import BaseModel
+from pyllm.llm_providers.open_ai import OpenAI_Provider
 
-client = OpenAI()
+
 
 
 class CalendarEvent(BaseModel):
@@ -10,21 +11,15 @@ class CalendarEvent(BaseModel):
 
 
 def extract_event_information(description: str) -> CalendarEvent:
-    completion = client.beta.chat.completions.parse(
-        model="gpt-4o-2024-08-06",
-        messages=[
-            {"role": "system", "content": "Extract the event information."},
-            {"role": "user", "content": description},
-        ],
-        response_format=CalendarEvent,
-    )
+    client = OpenAI_Provider("Extract the event information.")
+    completion=client.completion(description,CalendarEvent)
     return completion
 
 
 extract_event_information("Alice and Bob are going to a science fair on Friday.")
 
 
-class EventExtractor(Functor):
+class EventExtractor:
     def __init__(self, model: str = "gpt-4o-2024-08-06"):
         super().__init__()
 
