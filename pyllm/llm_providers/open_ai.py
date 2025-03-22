@@ -10,7 +10,7 @@ from pyllm.configuration import Configuration
 
 class OpenAI_Provider:
     def __init__(self,system_prompt:str=None):
-        self.api_key = Configuration.get_instance().get(
+        self.api_key = Configuration(configs={"OPENAI_API_KEY":"123"}).get(
             "OPENAI_API_KEY"
         )  # Todo: logics of geeting the api key here
         self.model = "gpt-4o-mini"
@@ -27,8 +27,8 @@ class OpenAI_Provider:
         self.memory.append({"role": "user", "content": user_input})
         if response_formt:
             response = openai.chat.completions.create(
-                model=self.model, messages=self.memory,response_format=response_formt
-            )
+                model=self.model, messages=self.memory
+            )# need to debug json format
             return response.choices[0].message.content
         else:
             response = openai.chat.completions.create(

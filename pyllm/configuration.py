@@ -13,13 +13,16 @@ class Configuration:
     def __init__(self, configs: dict = None):
         if configs is None:
             current_folder = os.path.dirname(os.path.abspath(__file__))
-            env_file = os.path.join(current_folder, "..", ".env")
-            if not os.path.exists(env_file):
-                config_stream = StringIO(Configuration.get_from_aws_secret_manager())
-                configs = dotenv_values(stream=config_stream)
+            if os.path.exists(os.path.join(current_folder, "config.yaml")):
+                pass
             else:
-                logging.debug(f"Loading configs from {env_file}")
-                configs = dotenv_values(os.path.join(current_folder, "..", ".env"))
+                env_file = os.path.join(current_folder, "..", ".env")
+                if not os.path.exists(env_file):
+                    config_stream = StringIO(Configuration.get_from_aws_secret_manager())
+                    configs = dotenv_values(stream=config_stream)
+                else:
+                    logging.debug(f"Loading configs from {env_file}")
+                    configs = dotenv_values(os.path.join(current_folder, "..", ".env"))
         self.__configs = configs
 
     @classmethod
