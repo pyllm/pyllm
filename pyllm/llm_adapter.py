@@ -1,6 +1,6 @@
 from pyllm.database import cached_staticmethod
-from pyllm.llm_providers.open_ai import PyLLMOpenAI
 from pyllm.llm_providers.llm_abstract import PyLLMAbstract
+from pyllm.llm_providers.open_ai import PyLLMOpenAI
 
 
 class LLM:
