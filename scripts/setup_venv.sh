@@ -7,7 +7,7 @@ SCRIPT_FOLDER_PATH=$(dirname ${SCRIPT_FILE_PATH})
 
 pushd "${SCRIPT_FOLDER_PATH}/../" > /dev/null
 
-[ ! -d "${VENV_FOLDER_NAME}" ] && echo "Creating python virtual environment under ${VENV_FOLDER_NAME}" && python -m venv ${VENV_FOLDER_NAME}
+[ ! -d "${VENV_FOLDER_NAME}" ] && echo "Creating python virtual environment under ${VENV_FOLDER_NAME}" && python3 -m venv ${VENV_FOLDER_NAME}
 
 source ${VENV_FOLDER_NAME}/bin/activate
 echo "Creating virtual environment, the initial run might take a while..."

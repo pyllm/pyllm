@@ -1,11 +1,12 @@
 from pyllm.database import cached_staticmethod
-from pyllm.llm_providers import open_ai
+from pyllm.llm_providers.open_ai import PyLLMOpenAI
+from pyllm.llm_providers.llm_abstract import PyLLMAbstract
 
 
 class LLM:
     def __init__(self, provider_name: str):
         if provider_name == "openai":
-            self.provider = open_ai
+            self.provider: PyLLMAbstract = PyLLMOpenAI()
         elif provider_name == "azure":
             raise NotImplementedError("Azure provider is not implemented yet")
         elif provider_name == "anthropic":
