@@ -10,8 +10,12 @@ class PyLLMAbstract(Configuration):
         super().__init__(configs)
 
         # OpenAI configurations
-        self.api_key = self.get("OPENAI_API_KEY")
-        self.model = self.get("OPENAI_MODEL")
+        self.openai_api_key = self.get("OPENAI_API_KEY")
+        self.openai_model = DefaultModel
+        
+        # Claude configurations
+        self.claude_api_key = self.get("CLAUDE_API_KEY")
+        self.claude_model = DefaultModel
 
     @abstractmethod
     def text_completion(self, system: str, prompt: str, output: object = DefaultModel):
