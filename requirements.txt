@@ -2,3 +2,5 @@ boto3
 pydantic
 pymongo
 python-dotenv
+openai
+anthropic
